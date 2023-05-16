@@ -33,7 +33,10 @@ def gui_main():
         window.destroy()
     def button_about():
         print("\n(gui_main): Update: User clicked infor button. Showing program info")
-        mesg = "This program was made by MrHatman26, AKA nobody important.\n\nWhat is this?: This is a tool to calculate the size of a directory and show the largest file in said directory.\n\nThis program was made using Python and uses the following libraries:\n-tkinter\n-os\n-threading\n\nCurrent Version: 1.0.5"
+        version_file = open("version.txt", "r")
+        version = version_file.read()
+        version_file.close()
+        mesg = "This program was made by MrHatman26, AKA nobody important.\n\nWhat is this?: This is a tool to calculate the size of a directory and show the largest file in said directory.\n\nThis program was made using Python and uses the following libraries:\n-tkinter\n-os\n-threading\n\nCurrent Version: " + version
         t.messagebox.showinfo("Info", mesg)
     #GUI
     resolution = "620x205"
