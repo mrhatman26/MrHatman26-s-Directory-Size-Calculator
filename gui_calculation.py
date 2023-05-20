@@ -67,6 +67,7 @@ def gui_calculation(selected_directory, byte_type):
                     gui_calculating_file_log.insert("end", str(f) + fp + "\n")
                     gui_calculating_file_log.see("end")
                     gui_calculating_file_log.configure(state="disabled")
+                    gui_calculating_file_amnt.configure(text="Files Checked: " + str(scanned_files))
             index = 0
             if bt.get() == "KB":
                 total_size = total_size / 1024
@@ -148,7 +149,7 @@ def gui_calculation(selected_directory, byte_type):
         return_empty = True
         
     #GUI
-    resolution = "800x260"
+    resolution = "800x280"
     title = "MrHatman26's Directory Size Calculator (Calculating...)"
     #Window settings
     window = t.Tk()
@@ -162,6 +163,8 @@ def gui_calculation(selected_directory, byte_type):
     gui_calculating_file_log = t.Text(window, height=10, width=84, bg="white")
     gui_calculating_file_log.pack()
     gui_calculating_file_log.configure(state="disabled")
+    gui_calculating_file_amnt = t.Label(window, text="Files Checked: 0")
+    gui_calculating_file_amnt.pack()
     gui_calculating_cancel_button = t.Button(window, text="Cancel", command=button_cancel, width=21).pack(pady=10)
     print("Done.\n\n(gui_calculation): Update running function and window")
     gui_calculating_p_bar.start()
