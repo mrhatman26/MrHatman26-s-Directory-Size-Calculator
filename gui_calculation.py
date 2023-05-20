@@ -3,8 +3,6 @@ from tkinter import filedialog, messagebox
 from tkinter.ttk import Progressbar
 import os
 from functions import button_exit
-import threading
-
 #Calculation screen
 def gui_calculation(selected_directory, byte_type):
     global return_empty
@@ -27,6 +25,9 @@ def gui_calculation(selected_directory, byte_type):
             largest_file_size = 0
             scanned_files = 0
             second_largest_files = [None, None, None, None, None, None, None, None, None, None]
+            gui_calculating_file_log.configure(state="normal")
+            gui_calculating_file_log.delete("1.0", "end")
+            gui_calculating_file_log.configure(state="disabled")
             for dirpath, dirnames, filenames in os.walk(sd):
                 for f in filenames:
                     fp = os.path.join(dirpath, f)
@@ -62,6 +63,10 @@ def gui_calculation(selected_directory, byte_type):
                                     gui_calculating_p_bar.update()                                            
                     scanned_files += 1
                     gui_calculating_p_bar.update()
+                    gui_calculating_file_log.configure(state="normal")
+                    gui_calculating_file_log.insert("end", str(f) + fp + "\n")
+                    gui_calculating_file_log.see("end")
+                    gui_calculating_file_log.configure(state="disabled")
             index = 0
             if bt.get() == "KB":
                 total_size = total_size / 1024
@@ -136,12 +141,6 @@ def gui_calculation(selected_directory, byte_type):
         window.destroy()
     def start_thread(sd, bt):
         directory_size_calculation(sd, bt)
-        '''thread = None
-        thread = threading.Thread(target=directory_size_calculation(sd, bt), daemon=True)
-        try:
-            thread.start()
-        except:
-            thread.join()'''
     def button_cancel():
         global return_empty
         print("\n(gui_calculation): Update: User clicked cancel.")
@@ -149,7 +148,7 @@ def gui_calculation(selected_directory, byte_type):
         return_empty = True
         
     #GUI
-    resolution = "800x100"
+    resolution = "800x260"
     title = "MrHatman26's Directory Size Calculator (Calculating...)"
     #Window settings
     window = t.Tk()
@@ -159,7 +158,10 @@ def gui_calculation(selected_directory, byte_type):
     #Window Widgets
     gui_calculating_label = t.Label(window, text="Calculating...").pack()
     gui_calculating_p_bar = Progressbar(window, orient='horizontal', length=675, mode='indeterminate')
-    gui_calculating_p_bar.pack()
+    gui_calculating_p_bar.pack(pady=5)
+    gui_calculating_file_log = t.Text(window, height=10, width=84, bg="white")
+    gui_calculating_file_log.pack()
+    gui_calculating_file_log.configure(state="disabled")
     gui_calculating_cancel_button = t.Button(window, text="Cancel", command=button_cancel, width=21).pack(pady=10)
     print("Done.\n\n(gui_calculation): Update running function and window")
     gui_calculating_p_bar.start()
