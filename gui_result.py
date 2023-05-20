@@ -13,6 +13,9 @@ def gui_results(selected_directory, total_size, byte_type):
     string_total_size = "Total Size: " + string_total_size + byte_type.get()
     largest_file_string = "\nLargest file: " + total_size[1] + "\nSize: " + str(round(total_size[2], 4)) + byte_type.get() + "\nDirectory: " + total_size[3].replace("\\", "/")
     files_scanned_string = "Amount of files checked: " + str(total_size[4])
+    print("\n")
+    for file in total_size[5]:
+        print(file)
     #GUI
     resolution = "800x240"
     title = "MrHatman26's Directory Size Calculator (Results)"
