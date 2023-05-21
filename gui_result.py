@@ -14,7 +14,7 @@ def gui_results(selected_directory, total_size, byte_type):
     largest_file_string = "\nLargest file: " + total_size[1] + "\nSize: " + str(round(total_size[2], 4)) + byte_type.get() + "\nDirectory: " + total_size[3].replace("\\", "/")
     files_scanned_string = "Amount of files checked: " + str(total_size[4])
     second_largest_files_string = ""
-    def testy():
+    def print_second_largest_files():
         for file in total_size[5]:
             if file is not None:
                 file_info = file.split("!+!")
@@ -51,6 +51,6 @@ def gui_results(selected_directory, total_size, byte_type):
     gui_results_okay_button = t.Button(window, text="Okay", command=button_okay, width=21, font=(None, 12)).pack(pady=10)
     gui_results_second_files_scroll = t.Scrollbar(window, command=gui_results_second_files_box.yview, width=15)
     gui_results_second_files_scroll.place(x=859, y=230, height=164)
-    testy()
+    print_second_largest_files
     print("Done!\n\n(gui_results): Waiting for user input")
     window.mainloop()
