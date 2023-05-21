@@ -39,7 +39,7 @@ def gui_calculation(selected_directory, byte_type):
                             largest_file_dir = fp
                         else:
                             if second_largest_files[0] is None:#len(second_largest_files) < 1:
-                                second_largest_files[0] = str(f) + "+" + str(os.path.getsize(fp)) + "+" + fp
+                                second_largest_files[0] = str(f) + "!+!" + str(os.path.getsize(fp)) + "!+!" + fp
                             else:
                                 old_value = ""
                                 old_value_alt = ""
@@ -47,15 +47,17 @@ def gui_calculation(selected_directory, byte_type):
                                 index = 0
                                 for file in second_largest_files:
                                     if file is None:
-                                        second_largest_files[index] = str(f) + "+" + str(os.path.getsize(fp)) + "+" + fp
+                                        second_largest_files[index] = str(f) + "!+!" + str(os.path.getsize(fp)) + "!+!" + fp
                                         break
+                                    else:
+                                        print(file.split("!+!"))
                                     if space_found is False:                                        
-                                        if int(os.path.getsize(fp)) > int(file.split("+")[1]):
+                                        if int(os.path.getsize(fp)) > int(file.split("!+!")[1]):
                                             old_value = file
-                                            second_largest_files[index] = str(f) + "+" + str(os.path.getsize(fp)) + "+" + fp
+                                            second_largest_files[index] = str(f) + "!+!" + str(os.path.getsize(fp)) + "!+!" + fp
                                             space_found = True
                                     else:
-                                        if int(old_value.split("+")[1]) > int(file.split("+")[1]):
+                                        if int(old_value.split("!+!")[1]) > int(file.split("!+!")[1]):
                                             old_value_alt = old_value
                                             old_value = file
                                             second_largest_files[index] = old_value_alt
@@ -64,7 +66,7 @@ def gui_calculation(selected_directory, byte_type):
                     scanned_files += 1
                     gui_calculating_p_bar.update()
                     gui_calculating_file_log.configure(state="normal")
-                    gui_calculating_file_log.insert("end", str(f) + fp + "\n")
+                    gui_calculating_file_log.insert("end", fp.replace("\\", "/") + "\n")
                     gui_calculating_file_log.see("end")
                     gui_calculating_file_log.configure(state="disabled")
                     gui_calculating_file_amnt.configure(text="Files Checked: " + str(scanned_files))
@@ -73,9 +75,10 @@ def gui_calculation(selected_directory, byte_type):
                 total_size = total_size / 1024
                 largest_file_size = largest_file_size / 1024
                 for file in second_largest_files:
-                    file_info = second_largest_files[index].split("+")
-                    file_info[1] = str(int(file_info[1]) / 1024)
-                    second_largest_files[index] = file_info[0] + "+" + file_info[1] + "+" + file_info[2]
+                    if file is not None:
+                        file_info = second_largest_files[index].split("!+!")
+                        file_info[1] = str(int(file_info[1]) / 1024)
+                        second_largest_files[index] = file_info[0] + "+" + file_info[1] + "+" + file_info[2]
                     index += 1
                     gui_calculating_p_bar.update()
             if bt.get() == "MB":
@@ -84,10 +87,11 @@ def gui_calculation(selected_directory, byte_type):
                 largest_file_size = largest_file_size / 1024
                 largest_file_size = largest_file_size / 1024
                 for file in second_largest_files:
-                    file_info = second_largest_files[index].split("+")
-                    file_info[1] = int(file_info[1]) / 1024
-                    file_info[1] = str(file_info[1] / 1024)
-                    second_largest_files[index] = file_info[0] + "+" + file_info[1] + "+" + file_info[2]
+                    if file is not None:
+                        file_info = second_largest_files[index].split("!+!")
+                        file_info[1] = int(file_info[1]) / 1024
+                        file_info[1] = str(file_info[1] / 1024)
+                        second_largest_files[index] = file_info[0] + "+" + file_info[1] + "+" + file_info[2]
                     index += 1
                     gui_calculating_p_bar.update()
             if bt.get() == "GB":
@@ -98,11 +102,12 @@ def gui_calculation(selected_directory, byte_type):
                 largest_file_size = largest_file_size / 1024
                 largest_file_size = largest_file_size / 1024
                 for file in second_largest_files:
-                    file_info = second_largest_files[index].split("+")
-                    file_info[1] = int(file_info[1]) / 1024
-                    file_info[1] = file_info[1] / 1024
-                    file_info[1] = str(file_info[1] / 1024)
-                    second_largest_files[index] = file_info[0] + "+" + file_info[1] + "+" + file_info[2]
+                    if file is not None:
+                        file_info = second_largest_files[index].split("!+!")
+                        file_info[1] = int(file_info[1]) / 1024
+                        file_info[1] = file_info[1] / 1024
+                        file_info[1] = str(file_info[1] / 1024)
+                        second_largest_files[index] = file_info[0] + "+" + file_info[1] + "+" + file_info[2]
                     index += 1
                     gui_calculating_p_bar.update()
             if bt.get() == "TB":
@@ -115,12 +120,13 @@ def gui_calculation(selected_directory, byte_type):
                 largest_file_size = largest_file_size / 1024
                 largest_file_size = largest_file_size / 1024
                 for file in second_largest_files:
-                    file_info = second_largest_files[index].split("+")
-                    file_info[1] = int(file_info[1]) / 1024
-                    file_info[1] = file_info[1] / 1024
-                    file_info[1] = file_info[1] / 1024
-                    file_info[1] = str(file_info[1] / 1024)
-                    second_largest_files[index] = file_info[0] + "+" + file_info[1] + "+" + file_info[2]
+                    if file is not None:
+                        file_info = second_largest_files[index].split("!+!")
+                        file_info[1] = int(file_info[1]) / 1024
+                        file_info[1] = file_info[1] / 1024
+                        file_info[1] = file_info[1] / 1024
+                        file_info[1] = str(file_info[1] / 1024)
+                        second_largest_files[index] = file_info[0] + "+" + file_info[1] + "+" + file_info[2]
                     index += 1
                     gui_calculating_p_bar.update()
             print("Done.")
