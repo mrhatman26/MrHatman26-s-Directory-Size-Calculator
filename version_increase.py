@@ -11,8 +11,7 @@ def vinc(mode):
     v_file.close()
     print("(version_increase): Previous version is "  + version)
     version = version.split(".")
-    print(version)
-    if mode in"Major" "major" "Majour" "majour":
+    if mode in "Major" "major" "Majour" "majour":
         version[0] = str(int(version[0]) + 1)
         version[1] = "0"
         version[2] = "0"
@@ -21,10 +20,9 @@ def vinc(mode):
         version[2] = "0"
     if mode in "Minor" "minor":
         version[2] = str(int(version[2]) + 1)
-        print("Yes")
     version = '.'.join(version)
     print("(version_increase): New version is " + version)
     v_file = open("version.txt", "w")
     v_file.write(version)
     v_file.close()
-    print("(version_increase): Returning to main")
+    print("(version_increase): Returning to main\n")

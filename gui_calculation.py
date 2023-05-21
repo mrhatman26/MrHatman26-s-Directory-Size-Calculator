@@ -49,8 +49,6 @@ def gui_calculation(selected_directory, byte_type):
                                     if file is None:
                                         second_largest_files[index] = str(f) + "!+!" + str(os.path.getsize(fp)) + "!+!" + fp
                                         break
-                                    else:
-                                        print(file.split("!+!"))
                                     if space_found is False:                                        
                                         if int(os.path.getsize(fp)) > int(file.split("!+!")[1]):
                                             old_value = file
@@ -78,7 +76,7 @@ def gui_calculation(selected_directory, byte_type):
                     if file is not None:
                         file_info = second_largest_files[index].split("!+!")
                         file_info[1] = str(int(file_info[1]) / 1024)
-                        second_largest_files[index] = file_info[0] + "+" + file_info[1] + "+" + file_info[2]
+                        second_largest_files[index] = file_info[0] + "!+!" + file_info[1] + "!+!" + file_info[2]
                     index += 1
                     gui_calculating_p_bar.update()
             if bt.get() == "MB":
@@ -91,7 +89,7 @@ def gui_calculation(selected_directory, byte_type):
                         file_info = second_largest_files[index].split("!+!")
                         file_info[1] = int(file_info[1]) / 1024
                         file_info[1] = str(file_info[1] / 1024)
-                        second_largest_files[index] = file_info[0] + "+" + file_info[1] + "+" + file_info[2]
+                        second_largest_files[index] = file_info[0] + "!+!" + file_info[1] + "!+!" + file_info[2]
                     index += 1
                     gui_calculating_p_bar.update()
             if bt.get() == "GB":
@@ -107,7 +105,7 @@ def gui_calculation(selected_directory, byte_type):
                         file_info[1] = int(file_info[1]) / 1024
                         file_info[1] = file_info[1] / 1024
                         file_info[1] = str(file_info[1] / 1024)
-                        second_largest_files[index] = file_info[0] + "+" + file_info[1] + "+" + file_info[2]
+                        second_largest_files[index] = file_info[0] + "!+!" + file_info[1] + "!+!" + file_info[2]
                     index += 1
                     gui_calculating_p_bar.update()
             if bt.get() == "TB":
@@ -126,7 +124,7 @@ def gui_calculation(selected_directory, byte_type):
                         file_info[1] = file_info[1] / 1024
                         file_info[1] = file_info[1] / 1024
                         file_info[1] = str(file_info[1] / 1024)
-                        second_largest_files[index] = file_info[0] + "+" + file_info[1] + "+" + file_info[2]
+                        second_largest_files[index] = file_info[0] + "!+!" + file_info[1] + "!+!" + file_info[2]
                     index += 1
                     gui_calculating_p_bar.update()
             print("Done.")
