@@ -3,7 +3,9 @@ import os
 from gui_main import gui_main
 from gui_calculation import gui_calculation
 from gui_result import gui_results
+from version_increase import vinc
 restart = True
+vinc("minor")
 def main_loop():
     gui_main_return = gui_main()
     print("(main.py) Update: gui_main_return = \n" + str(gui_main_return[0]) + "\n" + str(gui_main_return[1]))
