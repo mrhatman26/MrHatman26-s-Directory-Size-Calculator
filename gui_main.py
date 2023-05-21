@@ -36,7 +36,7 @@ def gui_main():
         version_file = open("version.txt", "r")
         version = version_file.read()
         version_file.close()
-        mesg = "This program was made by MrHatman26, AKA nobody important.\n\nWhat is this?: This is a tool to calculate the size of a directory and show the largest file in said directory.\n\nThis program was made using Python and uses the following libraries:\n-tkinter\n-os\n-threading\n\nCurrent Version: " + version
+        mesg = "This program was made by MrHatman26, AKA nobody important.\n\nWhat is this?: This is a tool to calculate the size of a directory and show the largest file in said directory.\n\nThis program was made using Python and uses the following libraries:\n-tkinter\n-os\n\nCurrent Version: " + version
         t.messagebox.showinfo("Info", mesg)
     #GUI
     resolution = "620x205"
